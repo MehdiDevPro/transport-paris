@@ -1,84 +1,75 @@
 # Transport Paris
 
-## GitHub Actions Deployment
+Site web de présentation des services de transport à Paris - Mehdi Dev Pro
 
-Ce dépôt contient une action GitHub qui téléverse automatiquement l'artifact et le déploie sur GitHub Pages.
+## Développement Local
+
+### Prérequis
+
+- Node.js 20+
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Lancement du serveur de développement
+
+```bash
+npm run dev
+```
+
+Le site sera accessible à l'adresse `http://localhost:5173`
+
+### Build de production
+
+```bash
+npm run build
+```
+
+Les fichiers de build seront générés dans le dossier `dist/`
+
+## Déploiement GitHub Pages
+
+Le site est automatiquement déployé sur GitHub Pages via GitHub Actions lors de chaque push sur la branche `main`.
 
 ### Configuration
 
 Le workflow `.github/workflows/deploy.yml` effectue les actions suivantes :
 
-1. **Upload de l'artifact** : Téléverse `artifact.tar` comme artifact GitHub avec une rétention de 90 jours
-2. **Déploiement GitHub Pages** : Extrait le contenu de l'archive et le déploie sur GitHub Pages
-
-### Déclenchement du workflow
-
-Le workflow se déclenche automatiquement :
-- À chaque push sur la branche `main`
-- Manuellement via l'onglet "Actions" dans GitHub (workflow_dispatch)
+1. **Build** : Installe les dépendances et build l'application React avec Vite
+2. **Déploiement** : Déploie le contenu du dossier `dist` sur GitHub Pages
 
 ### Configuration GitHub Pages
 
-Pour activer le déploiement, assurez-vous que GitHub Pages est configuré dans les paramètres du dépôt :
+Assurez-vous que GitHub Pages est configuré dans les paramètres du dépôt :
 
 1. Allez dans **Settings** > **Pages**
 2. Sous **Source**, sélectionnez **GitHub Actions**
-3. Le site sera déployé automatiquement lors du prochain push ou déclenchement manuel
+3. Le site sera déployé automatiquement
 
-### Structure de l'artifact
+### URL du site
 
-L'`artifact.tar` doit contenir un site web statique avec au minimum un fichier `index.html` à la racine.
+Le site est accessible à : `https://mehdidevpro.github.io/transport-paris/`
 
-## Workflow Details
+## Technologies
 
-### Jobs
+- React 18
+- Vite 5
+- CSS moderne
 
-#### 1. upload-artifact
-- Checkout du code
-- Upload de `artifact.tar` comme artifact GitHub
+## Structure du projet
 
-#### 2. deploy
-- Dépend du job `upload-artifact`
-- Checkout du code
-- Extraction de `artifact.tar` dans le répertoire `dist`
-- Configuration de GitHub Pages
-- Upload du contenu pour Pages
-- Déploiement sur GitHub Pages
-
-### Permissions
-
-Le workflow nécessite les permissions suivantes :
-- `contents: read` - Pour lire le contenu du dépôt
-- `pages: write` - Pour écrire sur GitHub Pages
-- `id-token: write` - Pour l'authentification OIDC
-
----
-
-## GitHub Actions Deployment (English)
-
-This repository contains a GitHub Action that automatically uploads the artifact and deploys it to GitHub Pages.
-
-### Configuration
-
-The workflow `.github/workflows/deploy.yml` performs the following actions:
-
-1. **Upload artifact**: Uploads `artifact.tar` as a GitHub artifact with 90-day retention
-2. **GitHub Pages deployment**: Extracts the archive content and deploys it to GitHub Pages
-
-### Workflow triggers
-
-The workflow is triggered automatically:
-- On every push to the `main` branch
-- Manually via the "Actions" tab in GitHub (workflow_dispatch)
-
-### GitHub Pages setup
-
-To enable deployment, make sure GitHub Pages is configured in the repository settings:
-
-1. Go to **Settings** > **Pages**
-2. Under **Source**, select **GitHub Actions**
-3. The site will be automatically deployed on the next push or manual trigger
-
-### Artifact structure
-
-The `artifact.tar` must contain a static website with at least an `index.html` file at the root.
+```
+transport-paris/
+├── public/           # Assets statiques
+├── src/             # Code source React
+│   ├── App.jsx      # Composant principal
+│   ├── main.jsx     # Point d'entrée
+│   └── *.css        # Styles
+├── index.html       # Template HTML
+├── vite.config.js   # Configuration Vite
+└── package.json     # Dépendances
+```
