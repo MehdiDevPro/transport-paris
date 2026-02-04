@@ -32,7 +32,6 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: upload-artifact
     runs-on: ubuntu-latest
     environment:
       name: github-pages

@@ -2,13 +2,13 @@
 
 ## GitHub Actions Deployment
 
-Ce dépôt contient une action GitHub qui uploade automatiquement l'artifact et le déploie sur GitHub Pages.
+Ce dépôt contient une action GitHub qui téléverse automatiquement l'artifact et le déploie sur GitHub Pages.
 
 ### Configuration
 
 Le workflow `.github/workflows/deploy.yml` effectue les actions suivantes :
 
-1. **Upload de l'artifact** : Uploade `artifact.tar` comme artifact GitHub avec une rétention de 90 jours
+1. **Upload de l'artifact** : Téléverse `artifact.tar` comme artifact GitHub avec une rétention de 90 jours
 2. **Déploiement GitHub Pages** : Extrait le contenu de l'archive et le déploie sur GitHub Pages
 
 ### Déclenchement du workflow
